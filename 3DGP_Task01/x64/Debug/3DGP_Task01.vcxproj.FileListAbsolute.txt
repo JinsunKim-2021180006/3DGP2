@@ -1,1 +1,2 @@
 C:\Users\jinsu\Desktop\project\3DGP_Task01\x64\Debug\3DGP_Task01.exe
+C:\Users\jinsu\Desktop\project\3DGP2\3DGP_Task01\x64\Debug\3DGP_Task01.exe
