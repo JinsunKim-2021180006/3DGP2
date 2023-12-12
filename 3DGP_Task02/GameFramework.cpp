@@ -407,9 +407,9 @@ void CGameFramework::BuildObjects()
 	m_pScene = new CScene();
 	if (m_pScene) m_pScene->BuildObjects(m_pd3dDevice, m_pd3dCommandList);
 
-	CSpaceshipPlayer *pAirplanePlayer = new CSpaceshipPlayer(m_pd3dDevice, m_pd3dCommandList, m_pScene->GetGraphicsRootSignature(), m_pScene->GetTerrain());
-	pAirplanePlayer->SetPosition(XMFLOAT3(3000.0f, 745.0f, 4000.0f));
-	m_pScene->m_pPlayer = m_pPlayer = pAirplanePlayer;
+	CSpaceshipPlayer *pSpaceShipPlayer = new CSpaceshipPlayer(m_pd3dDevice, m_pd3dCommandList, m_pScene->GetGraphicsRootSignature(), m_pScene->GetTerrain());
+	pSpaceShipPlayer->SetPosition(XMFLOAT3(3000.0f, 745.0f, 4000.0f));
+	m_pScene->m_pPlayer = m_pPlayer = pSpaceShipPlayer;
 	m_pCamera = m_pPlayer->GetCamera();
 
 	m_pd3dCommandList->Close();
@@ -453,6 +453,7 @@ void CGameFramework::ProcessInput()
 		{
 			((CSpaceshipPlayer*)m_pPlayer)->FireBullet(NULL);
 		}
+
 		float cxDelta = 0.0f, cyDelta = 0.0f;
 		POINT ptCursorPos;
 		if (GetCapture() == m_hWnd)

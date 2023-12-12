@@ -114,8 +114,6 @@ public:
 	CSpaceshipPlayer(ID3D12Device* pd3dDevice, ID3D12GraphicsCommandList* pd3dCommandList, ID3D12RootSignature* pd3dGraphicsRootSignature, void* pContext);
 	virtual ~CSpaceshipPlayer();
 
-	CGameObject* m_pMainRotorFrame = NULL;
-	CGameObject* m_pTailRotorFrame = NULL;
 
 public:
 	float						m_fBulletEffectiveRange = 800.0f;

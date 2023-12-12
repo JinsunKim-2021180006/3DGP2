@@ -199,7 +199,7 @@ void CScene::BuildObjects(ID3D12Device *pd3dDevice, ID3D12GraphicsCommandList *p
 	int nObjects = pObjectsShader->GetNumberOfObjects();
 
 	m_pDescriptorHeap = new CDescriptorHeap();
-	CreateCbvSrvDescriptorHeaps(pd3dDevice, 0, 2 + 4 + 1 + 3 + 3 + 2 + 50); //SuperCobra(17), Player(4), Skybox(1), Terrain(3), Water(3), glass(2), Bullet(50)
+	CreateCbvSrvDescriptorHeaps(pd3dDevice, 0, 4 + 4 + 1 + 3 + 3 + 2 + 100); //Enemy(4), Player(4), Skybox(1), Terrain(3), Water(3), glass(2), Bullet(50)
 
 	BuildDefaultLightsAndMaterials();
 
@@ -329,7 +329,7 @@ ID3D12RootSignature *CScene::CreateGraphicsRootSignature(ID3D12Device *pd3dDevic
 
 	pd3dDescriptorRanges[10].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
 	pd3dDescriptorRanges[10].NumDescriptors = 1;
-	pd3dDescriptorRanges[10].BaseShaderRegister = 20; //t6: gtxtTexture
+	pd3dDescriptorRanges[10].BaseShaderRegister = 20; //t20: gtxtTexture
 	pd3dDescriptorRanges[10].RegisterSpace = 0;
 	pd3dDescriptorRanges[10].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 

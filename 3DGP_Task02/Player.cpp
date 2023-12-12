@@ -350,7 +350,7 @@ CSpaceshipPlayer::CSpaceshipPlayer(ID3D12Device* pd3dDevice, ID3D12GraphicsComma
 	m_pShader = new CPlayerShader();
 	m_pShader->CreateShader(pd3dDevice, pd3dCommandList, pd3dGraphicsRootSignature);
 
-	m_pBulletsShader = new CObjectsShader();
+	m_pBulletsShader = new CBulletShader();
 	m_pBulletsShader->CreateShader(pd3dDevice, pd3dCommandList, pd3dGraphicsRootSignature);
 	
 	for (int i = 0; i < BULLETS; ++i) {
@@ -363,7 +363,7 @@ CSpaceshipPlayer::CSpaceshipPlayer(ID3D12Device* pd3dDevice, ID3D12GraphicsComma
 		m_ppBullets[i] = pBulletObject;
 	}
 	                                                                                                                                                                                                                                                                                                                                                                                                                                
-	CGameObject* pGameObject = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, pd3dGraphicsRootSignature, "Model/Mi24.bin", m_pShader);
+	CGameObject* pGameObject = CGameObject::LoadGeometryFromFile(pd3dDevice, pd3dCommandList, pd3dGraphicsRootSignature, "Model/StarSparrow2.bin", m_pShader);
 	SetChild(pGameObject);
 
 	PrepareAnimate();
@@ -381,27 +381,14 @@ CSpaceshipPlayer::~CSpaceshipPlayer()
 	for (int i = 0; i < BULLETS; i++) if (m_ppBullets[i]) delete[] m_ppBullets[i];
 }
 
-
-
 void CSpaceshipPlayer::PrepareAnimate()
 {
-	m_pMainRotorFrame = FindFrame("Top_Rotor");
-	m_pTailRotorFrame = FindFrame("Tail_Rotor");
+	
 }
 
 void CSpaceshipPlayer::Animate(float fTimeElapsed, XMFLOAT4X4* pxmf4x4Parent)
 {
-	if (m_pMainRotorFrame)
-	{
-		XMMATRIX xmmtxRotate = XMMatrixRotationY(XMConvertToRadians(360.0f * 2.0f) * fTimeElapsed);
-		m_pMainRotorFrame->m_xmf4x4Transform = Matrix4x4::Multiply(xmmtxRotate, m_pMainRotorFrame->m_xmf4x4Transform);
-	}
-	if (m_pTailRotorFrame)
-	{
-		XMMATRIX xmmtxRotate = XMMatrixRotationX(XMConvertToRadians(360.0f * 4.0f) * fTimeElapsed);
-		m_pTailRotorFrame->m_xmf4x4Transform = Matrix4x4::Multiply(xmmtxRotate, m_pTailRotorFrame->m_xmf4x4Transform);
-	}
-
+	
 	for (int i = 0; i < BULLETS; i++)
 	{
 		if (m_ppBullets[i]->m_bActive) {
@@ -549,7 +536,7 @@ void CSpaceshipPlayer::FireBullet(CGameObject* pLockedObject)
 		xmf3Direction.y += 0.15f;
 		pBulletObject->SetMovingDirection(xmf3Direction);
 		pBulletObject->SetFirePosition(xmf3FirePosition);
-		pBulletObject->SetScale(0.05, 0.05, 1);
+		pBulletObject->SetScale(0.05, 0.05, 0.05);
 		pBulletObject->SetActive(true);
 		if (pLockedObject)
 		{
